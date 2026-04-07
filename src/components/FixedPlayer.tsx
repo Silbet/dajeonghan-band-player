@@ -1,3 +1,4 @@
+import { SkipBack, SkipForward, Play, Pause } from 'lucide-react';
 import { usePlayer } from '../context/PlayerContext';
 import { resolveCoverUrl } from '../utils/coverImage';
 import SeekBar from './SeekBar';
@@ -50,29 +51,29 @@ export default function FixedPlayer() {
           />
 
           {/* Controls */}
-          <div className="flex items-center justify-center gap-6">
+          <div className="flex items-center justify-center gap-8">
             <button
               onClick={() => dispatch({ type: 'PREV' })}
-              className="text-xl text-text-secondary hover:text-text-primary transition-colors"
+              className="text-text-secondary hover:text-text-primary transition-colors active:scale-90"
               aria-label="이전 곡"
             >
-              ⏮
+              <SkipBack size={28} fill="currentColor" />
             </button>
             <button
               onClick={() =>
                 dispatch({ type: state.isPlaying ? 'PAUSE' : 'PLAY' })
               }
-              className="w-10 h-10 flex items-center justify-center rounded-full bg-text-primary text-bg-primary text-lg hover:scale-105 transition-transform"
+              className="w-14 h-14 flex items-center justify-center rounded-full bg-text-primary text-bg-primary hover:scale-105 active:scale-95 transition-transform shadow-lg"
               aria-label={state.isPlaying ? '일시정지' : '재생'}
             >
-              {state.isPlaying ? '⏸' : '▶'}
+              {state.isPlaying ? <Pause size={26} fill="currentColor" /> : <Play size={26} fill="currentColor" style={{ marginLeft: '3px' }} />}
             </button>
             <button
               onClick={() => dispatch({ type: 'NEXT' })}
-              className="text-xl text-text-secondary hover:text-text-primary transition-colors"
+              className="text-text-secondary hover:text-text-primary transition-colors active:scale-90"
               aria-label="다음 곡"
             >
-              ⏭
+              <SkipForward size={28} fill="currentColor" />
             </button>
           </div>
         </div>
