@@ -30,7 +30,7 @@ export default function FixedPlayer() {
               <p className="text-xs text-text-secondary truncate">
                 {currentTrack.artist} · {currentTrack.album}
               </p>
-              <p className="text-xs text-text-muted truncate">
+              <p className="text-xs text-text-muted">
                 {currentTrack.members.map((m) => m.name).join(', ')}
               </p>
             </div>
