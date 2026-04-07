@@ -34,12 +34,12 @@ describe('TrackList', () => {
       currentIndex: -1,
       isPlaying: false,
       autoplay: true,
-      shuffle: false,
       sortOrder: 'desc',
       currentTime: 0,
       duration: 0,
       isLoading: false,
       error: null,
+      audioError: null,
     };
   });
 

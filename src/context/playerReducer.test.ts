@@ -26,7 +26,6 @@ const tracks: Track[] = [
 describe('initialState', () => {
   it('has correct default values', () => {
     expect(initialState.autoplay).toBe(true);
-    expect(initialState.shuffle).toBe(false);
     expect(initialState.sortOrder).toBe('desc');
     expect(initialState.currentIndex).toBe(-1);
     expect(initialState.isPlaying).toBe(false);
@@ -103,30 +102,6 @@ describe('playerReducer', () => {
     it('sets currentTime to payload', () => {
       const state = playerReducer(initialState, { type: 'SEEK', payload: 42.5 });
       expect(state.currentTime).toBe(42.5);
-    });
-  });
-
-  describe('TOGGLE_AUTOPLAY', () => {
-    it('toggles autoplay', () => {
-      const s1 = playerReducer(initialState, { type: 'TOGGLE_AUTOPLAY' });
-      expect(s1.autoplay).toBe(false);
-      const s2 = playerReducer(s1, { type: 'TOGGLE_AUTOPLAY' });
-      expect(s2.autoplay).toBe(true);
-    });
-  });
-
-  describe('TOGGLE_SHUFFLE', () => {
-    it('ON creates shuffled queue, OFF restores sorted queue', () => {
-      const loaded = playerReducer(initialState, { type: 'LOAD_TRACKS', payload: tracks });
-      const selected = playerReducer(loaded, { type: 'SELECT_TRACK', payload: 0 });
-      const shuffled = playerReducer(selected, { type: 'TOGGLE_SHUFFLE' });
-      expect(shuffled.shuffle).toBe(true);
-      expect(shuffled.queue).toHaveLength(tracks.length);
-
-      const unshuffled = playerReducer(shuffled, { type: 'TOGGLE_SHUFFLE' });
-      expect(unshuffled.shuffle).toBe(false);
-      // Should be back to desc sorted
-      expect(unshuffled.queue[0].id).toBe('2');
     });
   });
 

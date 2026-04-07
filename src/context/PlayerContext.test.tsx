@@ -41,7 +41,6 @@ describe('PlayerContext', () => {
 
     expect(result.current.state.isPlaying).toBe(false);
     expect(result.current.state.autoplay).toBe(true);
-    expect(result.current.state.shuffle).toBe(false);
     expect(result.current.state.currentIndex).toBe(-1);
     expect(result.current.state.tracks).toEqual([]);
     expect(result.current.state.queue).toEqual([]);
@@ -70,22 +69,6 @@ describe('PlayerContext', () => {
       result.current.dispatch({ type: 'PAUSE' });
     });
     expect(result.current.state.isPlaying).toBe(false);
-  });
-
-  it('dispatches TOGGLE_AUTOPLAY', () => {
-    const { result } = renderHook(() => usePlayer(), { wrapper });
-
-    expect(result.current.state.autoplay).toBe(true);
-
-    act(() => {
-      result.current.dispatch({ type: 'TOGGLE_AUTOPLAY' });
-    });
-    expect(result.current.state.autoplay).toBe(false);
-
-    act(() => {
-      result.current.dispatch({ type: 'TOGGLE_AUTOPLAY' });
-    });
-    expect(result.current.state.autoplay).toBe(true);
   });
 
   it('dispatches SET_ERROR', () => {
