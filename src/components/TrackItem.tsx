@@ -86,10 +86,17 @@ export default function TrackItem({ track, isActive, onSelect }: TrackItemProps)
       {/* Expanded details */}
       {expanded && (
         <div className="px-3 pb-3 pl-16 space-y-1">
-          <p className="text-xs text-text-secondary">
-            <span className="text-text-muted">멤버: </span>
-            {track.members.map((m) => `${m.name}(${m.part})`).join(', ')}
-          </p>
+          {Object.entries(
+            track.members.reduce<Record<string, string[]>>((acc, m) => {
+              (acc[m.part] ??= []).push(m.name);
+              return acc;
+            }, {})
+          ).map(([part, names]) => (
+            <p key={part} className="text-xs text-text-secondary">
+              <span className="text-text-muted">{part}: </span>
+              {names.join(', ')}
+            </p>
+          ))}
           <p className="text-xs text-text-secondary">
             <span className="text-text-muted">녹음: </span>
             {track.recordedAt}

@@ -31,9 +31,7 @@ export default function FixedPlayer() {
                 {currentTrack.artist} · {currentTrack.album}
               </p>
               <p className="text-xs text-text-muted truncate">
-                {currentTrack.members.map((m) => `${m.name}(${m.part})`).join(', ')}
-                {' · '}
-                {currentTrack.recordedAt}
+                {currentTrack.members.map((m) => m.name).join(', ')}
               </p>
             </div>
           </div>
