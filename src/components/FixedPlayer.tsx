@@ -1,7 +1,6 @@
 import { SkipBack, SkipForward, Play, Pause } from 'lucide-react';
 import { usePlayer } from '../context/PlayerContext';
 import { resolveCoverUrl } from '../utils/coverImage';
-import { formatPlayCount } from '../utils/formatPlayCount';
 import SeekBar from './SeekBar';
 
 export default function FixedPlayer() {
@@ -29,7 +28,7 @@ export default function FixedPlayer() {
                 {currentTrack.title}
               </p>
               <p className="text-xs text-text-secondary truncate">
-                {currentTrack.artist} · {currentTrack.album} · {formatPlayCount(currentTrack.playCount)}
+                {currentTrack.artist} · {currentTrack.album}
               </p>
               <p className="text-xs text-text-muted">
                 {currentTrack.members.map((m) => m.name).join(', ')}
