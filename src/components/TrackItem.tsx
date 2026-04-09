@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import type { Track } from '../types';
 import { resolveCoverUrl } from '../utils/coverImage';
 
@@ -6,11 +5,12 @@ interface TrackItemProps {
   track: Track;
   index: number;
   isActive: boolean;
+  expanded: boolean;
   onSelect: () => void;
+  onToggleExpand: () => void;
 }
 
-export default function TrackItem({ track, isActive, onSelect }: TrackItemProps) {
-  const [expanded, setExpanded] = useState(false);
+export default function TrackItem({ track, isActive, expanded, onSelect, onToggleExpand }: TrackItemProps) {
 
   return (
     <li
@@ -55,7 +55,7 @@ export default function TrackItem({ track, isActive, onSelect }: TrackItemProps)
 
         {/* Expand/collapse triangle */}
         <button
-          onClick={() => setExpanded((prev) => !prev)}
+          onClick={onToggleExpand}
           className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full text-text-primary hover:bg-bg-hover active:bg-bg-tertiary transition-colors"
           aria-expanded={expanded}
           aria-label={`${track.title} 상세정보 ${expanded ? '접기' : '펼치기'}`}
