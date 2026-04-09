@@ -20,4 +20,6 @@ export async function fetchTracks(): Promise<Track[]> {
   return (data as SupabaseTrackRow[]).map(mapSupabaseTrack);
 }
 
-
+export async function incrementPlayCount(trackId: string): Promise<void> {
+  await supabase.rpc('increment_play_count', { track_id: trackId });
+}

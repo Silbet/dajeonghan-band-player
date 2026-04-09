@@ -101,6 +101,17 @@ export function playerReducer(state: PlayerState, action: PlayerAction): PlayerS
     case 'SET_AUDIO_ERROR':
       return { ...state, audioError: action.payload, isPlaying: false };
 
+    case 'INCREMENT_PLAY_COUNT': {
+      const trackId = action.payload;
+      const updateIn = (arr: Track[]) =>
+        arr.map((t) => t.id === trackId ? { ...t, playCount: t.playCount + 1 } : t);
+      return {
+        ...state,
+        tracks: updateIn(state.tracks),
+        queue: updateIn(state.queue),
+      };
+    }
+
     default:
       return state;
   }

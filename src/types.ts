@@ -16,6 +16,7 @@ export interface Track {
   audioUrl: string;
   coverUrl: string | null;
   members: Member[];
+  playCount: number;
 }
 
 // --- Player State & Actions ---
@@ -46,7 +47,8 @@ export type PlayerAction =
   | { type: 'SET_TIME'; payload: number }
   | { type: 'SET_DURATION'; payload: number }
   | { type: 'SET_ERROR'; payload: string }
-  | { type: 'SET_AUDIO_ERROR'; payload: string };
+  | { type: 'SET_AUDIO_ERROR'; payload: string }
+  | { type: 'INCREMENT_PLAY_COUNT'; payload: string };
 
 // --- Supabase DB Response Type ---
 
@@ -61,6 +63,7 @@ export interface SupabaseTrackRow {
   audio_url: string;
   cover_url: string | null;
   members: Member[];
+  play_count: number;
 }
 
 // --- Mapping Function ---
@@ -77,5 +80,6 @@ export function mapSupabaseTrack(row: SupabaseTrackRow): Track {
     audioUrl: row.audio_url,
     coverUrl: row.cover_url,
     members: row.members,
+    playCount: row.play_count,
   };
 }

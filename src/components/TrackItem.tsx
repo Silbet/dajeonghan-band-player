@@ -1,5 +1,6 @@
 import type { Track } from '../types';
 import { resolveCoverUrl } from '../utils/coverImage';
+import { formatPlayCount } from '../utils/formatPlayCount';
 
 interface TrackItemProps {
   track: Track;
@@ -49,7 +50,7 @@ export default function TrackItem({ track, isActive, expanded, onSelect, onToggl
             {track.title}
           </p>
           <p className="text-xs text-text-secondary truncate">
-            {track.artist} · {track.album}
+            {track.artist} · {track.album} · {formatPlayCount(track.playCount)}
           </p>
         </button>
 
